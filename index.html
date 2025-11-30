@@ -25,6 +25,7 @@
             --text-primary: #FFFFFF;
             --text-secondary: rgba(235, 235, 245, 0.6);
             --accent-mesh: linear-gradient(135deg, #FF9F0A, #FF375F, #BF5AF2);
+            --accent-text: #FF9F0A;
             --success-color: #30d158;
             --error-color: #ff453a;
             --nav-blur: rgba(20, 20, 22, 0.85);
@@ -102,22 +103,37 @@
         }
         .card:active { transform: scale(0.98); background: rgba(50, 50, 52, 0.6); }
 
-        .card-header { padding: 22px; display: flex; justify-content: space-between; align-items: center; }
-        .ex-name { font-weight: 700; font-size: 1.1rem; margin-bottom: 5px; color: #fff; }
-        .ex-meta { font-size: 0.9rem; color: #bbaaff; font-weight: 500; }
+        .card-header { padding: 20px 22px; display: flex; justify-content: space-between; align-items: center; }
+        
+        /* New Header Layout for English Names */
+        .header-content { display: flex; flex-direction: column; }
+        .ex-name { font-weight: 700; font-size: 1.1rem; margin-bottom: 2px; color: #fff; }
+        .ex-eng { font-size: 0.8rem; color: var(--accent-text); font-style: italic; opacity: 0.9; margin-bottom: 4px; font-weight: 500; }
+        .ex-meta { font-size: 0.85rem; color: #bbaaff; font-weight: 500; }
         
         .toggle-btn { 
             width: 36px; height: 36px; border-radius: 50%; 
             background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
             display: flex; align-items: center; justify-content: center; color: white;
-            transition: 0.4s;
+            transition: 0.4s; flex-shrink: 0; margin-left: 10px;
         }
         .card.open .toggle-btn { transform: rotate(180deg); background: #fff; color: black; }
 
         .card-body { display: none; padding: 0 22px 24px; border-top: 1px solid rgba(255,255,255,0.05); }
         .card.open .card-body { display: block; }
 
-        /* --- NEW TECH GUIDE STYLES (Redesigned) --- */
+        /* --- Variations Section --- */
+        .var-box {
+            margin-top: 15px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            border: 1px dashed rgba(255, 255, 255, 0.15);
+        }
+        .var-title { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
+        .var-text { font-size: 0.9rem; color: #ddd; }
+
+        /* --- Tech Guide Styles --- */
         .tech-guide { display: grid; gap: 15px; margin: 20px 0; }
         
         .guide-box {
@@ -125,57 +141,27 @@
             padding: 15px 15px 15px 20px;
             border-radius: 12px;
             overflow: hidden;
-            /* Fundo sutil gradiente */
             background: linear-gradient(90deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%);
         }
 
-        /* Success (Green) Variant */
-        .guide-box.success {
-            border-left: 3px solid var(--success-color);
-        }
+        .guide-box.success { border-left: 3px solid var(--success-color); }
         .guide-box.success .guide-title { color: var(--success-color); }
         
-        /* Error (Red) Variant */
-        .guide-box.error {
-            border-left: 3px solid var(--error-color);
-        }
+        .guide-box.error { border-left: 3px solid var(--error-color); }
         .guide-box.error .guide-title { color: var(--error-color); }
 
         .guide-title {
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+            margin-bottom: 8px; display: flex; align-items: center; gap: 8px;
         }
 
-        .guide-list {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-        
+        .guide-list { list-style: none; margin: 0; padding: 0; }
         .guide-list li {
-            position: relative;
-            padding-left: 15px;
-            margin-bottom: 6px;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.85);
-            line-height: 1.5;
+            position: relative; padding-left: 15px; margin-bottom: 6px;
+            font-size: 0.9rem; color: rgba(255, 255, 255, 0.85); line-height: 1.5;
         }
-
-        /* Bullet Points customizados */
-        .guide-box.success .guide-list li::before {
-            content: "•"; color: var(--success-color);
-            position: absolute; left: 0; top: 0; font-weight: bold;
-        }
-        .guide-box.error .guide-list li::before {
-            content: "•"; color: var(--error-color);
-            position: absolute; left: 0; top: 0; font-weight: bold;
-        }
+        .guide-box.success .guide-list li::before { content: "•"; color: var(--success-color); position: absolute; left: 0; top: 0; font-weight: bold; }
+        .guide-box.error .guide-list li::before { content: "•"; color: var(--error-color); position: absolute; left: 0; top: 0; font-weight: bold; }
 
         .btn-video {
             display: block; width: 100%; padding: 16px; text-align: center;
@@ -238,15 +224,19 @@
 
             <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
-                    <div>
+                    <div class="header-content">
                         <div class="ex-name">Supino Inclinado Halter</div>
+                        <div class="ex-eng">Incline Dumbbell Press</div>
                         <div class="ex-meta">4 Séries x 8-12 Reps</div>
                     </div>
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
+                    <div class="var-box">
+                        <div class="var-title">🔄 Opções / Máquinas</div>
+                        <div class="var-text">Smith Machine, Máquina Articulada (Plate Loaded) ou Barra Livre.</div>
+                    </div>
                     <div class="tech-guide">
-                        <!-- Caixa de Execução -->
                         <div class="guide-box success">
                             <div class="guide-title">Execução</div>
                             <ul class="guide-list">
@@ -255,11 +245,10 @@
                                 <li>Amplitude máxima na descida.</li>
                             </ul>
                         </div>
-                        <!-- Caixa de Erro -->
                         <div class="guide-box error">
                             <div class="guide-title">Erros Comuns</div>
                             <ul class="guide-list">
-                                <li>Bater os halteres no topo (perde tensão).</li>
+                                <li>Bater os halteres no topo.</li>
                                 <li>Tirar as costas do banco.</li>
                             </ul>
                         </div>
@@ -270,13 +259,18 @@
 
             <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
-                    <div>
-                        <div class="ex-name">Puxada Alta (Pulldown)</div>
+                    <div class="header-content">
+                        <div class="ex-name">Puxada Alta</div>
+                        <div class="ex-eng">Lat Pulldown</div>
                         <div class="ex-meta">4 Séries x 10-12 Reps</div>
                     </div>
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
+                    <div class="var-box">
+                        <div class="var-title">🔄 Opções / Máquinas</div>
+                        <div class="var-text">Barra Fixa (Pull-up), Graviton ou Máquina Articulada (High Row).</div>
+                    </div>
                     <div class="tech-guide">
                         <div class="guide-box success">
                             <div class="guide-title">Execução</div>
@@ -288,8 +282,8 @@
                         <div class="guide-box error">
                             <div class="guide-title">Erros Comuns</div>
                             <ul class="guide-list">
-                                <li>Usar impulso do corpo (gangorra).</li>
-                                <li>Puxar a barra até a barriga.</li>
+                                <li>Usar impulso (gangorra).</li>
+                                <li>Puxar atrás da nuca.</li>
                             </ul>
                         </div>
                     </div>
@@ -299,26 +293,24 @@
 
             <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
-                    <div>
+                    <div class="header-content">
                         <div class="ex-name">Supino Reto Barra</div>
+                        <div class="ex-eng">Barbell Bench Press</div>
                         <div class="ex-meta">3 Séries x 6-10 Reps</div>
                     </div>
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
+                    <div class="var-box">
+                        <div class="var-title">🔄 Opções / Máquinas</div>
+                        <div class="var-text">Supino com Halteres, Máquina Vertical (Chest Press) ou Smith.</div>
+                    </div>
                     <div class="tech-guide">
                         <div class="guide-box success">
                             <div class="guide-title">Execução</div>
                             <ul class="guide-list">
                                 <li>Pés firmes no chão.</li>
                                 <li>Barra desce na linha dos mamilos.</li>
-                            </ul>
-                        </div>
-                        <div class="guide-box error">
-                            <div class="guide-title">Erros Comuns</div>
-                            <ul class="guide-list">
-                                <li>Abrir demais os cotovelos (lesiona ombro).</li>
-                                <li>Descer a barra no pescoço.</li>
                             </ul>
                         </div>
                     </div>
@@ -328,26 +320,24 @@
 
             <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
-                    <div>
+                    <div class="header-content">
                         <div class="ex-name">Remada Curvada</div>
+                        <div class="ex-eng">Bent-over Barbell Row</div>
                         <div class="ex-meta">3 Séries x 8-10 Reps</div>
                     </div>
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                     <div class="tech-guide">
+                    <div class="var-box">
+                        <div class="var-title">🔄 Opções / Máquinas</div>
+                        <div class="var-text">Remada Cavalinho (T-Bar), Serrote (Halter) ou Remada Baixa (Cabo).</div>
+                    </div>
+                    <div class="tech-guide">
                         <div class="guide-box success">
                             <div class="guide-title">Execução</div>
                             <ul class="guide-list">
                                 <li>Coluna reta o tempo todo.</li>
-                                <li>Olhe para o chão (alinhar pescoço).</li>
-                            </ul>
-                        </div>
-                        <div class="guide-box error">
-                            <div class="guide-title">Erros Comuns</div>
-                            <ul class="guide-list">
-                                <li>Ficar muito em pé (vira encolhimento).</li>
-                                <li>Arredondar a lombar.</li>
+                                <li>Puxe na direção do umbigo.</li>
                             </ul>
                         </div>
                     </div>
@@ -359,26 +349,24 @@
 
             <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
-                    <div>
-                        <div class="ex-name">Bi-Set: Voador + Inv.</div>
+                    <div class="header-content">
+                        <div class="ex-name">Bi-Set: Voador + Inverso</div>
+                        <div class="ex-eng">Pec Deck Fly + Reverse Fly</div>
                         <div class="ex-meta">3 Séries x 15 Reps</div>
                     </div>
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
+                    <div class="var-box">
+                        <div class="var-title">🔄 Opções / Máquinas</div>
+                        <div class="var-text">Polia (Crossover) ou Halteres (Crucifixo Reto + Crucifixo Inverso).</div>
+                    </div>
                     <div class="tech-guide">
                         <div class="guide-box success">
                             <div class="guide-title">Execução</div>
                             <ul class="guide-list">
                                 <li>Cotovelos levemente flexionados sempre.</li>
-                                <li>Imagine que vai "abraçar uma árvore".</li>
-                            </ul>
-                        </div>
-                         <div class="guide-box error">
-                            <div class="guide-title">Erros Comuns</div>
-                            <ul class="guide-list">
-                                <li>Esticar totalmente os braços.</li>
-                                <li>Tirar o ombro do encosto.</li>
+                                <li>Sem descanso entre os exercícios.</li>
                             </ul>
                         </div>
                     </div>
@@ -388,22 +376,14 @@
 
             <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
-                    <div>
+                    <div class="header-content">
                         <div class="ex-name">Abd. Infra + Prancha</div>
+                        <div class="ex-eng">Leg Raise + Plank</div>
                         <div class="ex-meta">3 Séries Falha</div>
                     </div>
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                     <div class="tech-guide">
-                        <div class="guide-box success">
-                            <div class="guide-title">Execução</div>
-                            <ul class="guide-list">
-                                <li>Contraia o abdômen para tirar o quadril do chão.</li>
-                                <li>Desça as pernas devagar.</li>
-                            </ul>
-                        </div>
-                    </div>
                     <a href="https://www.youtube.com/results?search_query=Abdominal+infra+solo" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
@@ -415,13 +395,18 @@
 
             <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
-                    <div>
+                    <div class="header-content">
                         <div class="ex-name">Agachamento</div>
+                        <div class="ex-eng">Squat (Smith or Free)</div>
                         <div class="ex-meta">4 Séries x 8-10 Reps</div>
                     </div>
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
+                    <div class="var-box">
+                        <div class="var-title">🔄 Opções / Máquinas</div>
+                        <div class="var-text">Hack Squat, Pendulum Squat ou Agachamento com Halteres (Goblet).</div>
+                    </div>
                     <div class="tech-guide">
                         <div class="guide-box success">
                             <div class="guide-title">Execução</div>
@@ -444,13 +429,18 @@
 
             <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
-                    <div>
+                    <div class="header-content">
                         <div class="ex-name">Leg Press 45º</div>
+                        <div class="ex-eng">Leg Press 45</div>
                         <div class="ex-meta">4 Séries x 10-12 Reps</div>
                     </div>
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
+                    <div class="var-box">
+                        <div class="var-title">🔄 Opções / Máquinas</div>
+                        <div class="var-text">Leg Press Horizontal ou Hack Machine.</div>
+                    </div>
                     <div class="tech-guide">
                         <div class="guide-box success">
                             <div class="guide-title">Execução</div>
@@ -463,7 +453,6 @@
                             <div class="guide-title">Erros Comuns</div>
                             <ul class="guide-list">
                                 <li>Esticar totalmente o joelho (travar).</li>
-                                <li>Descolar o bumbum do banco.</li>
                             </ul>
                         </div>
                     </div>
@@ -473,8 +462,9 @@
 
             <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
-                    <div>
+                    <div class="header-content">
                         <div class="ex-name">Cadeira Extensora</div>
+                        <div class="ex-eng">Leg Extension</div>
                         <div class="ex-meta">3 Séries + Drop</div>
                     </div>
                     <div class="toggle-btn">▼</div>
@@ -495,13 +485,18 @@
 
             <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
-                    <div>
+                    <div class="header-content">
                         <div class="ex-name">Stiff com Barra</div>
+                        <div class="ex-eng">Stiff-leg Deadlift</div>
                         <div class="ex-meta">4 Séries x 10-12 Reps</div>
                     </div>
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
+                    <div class="var-box">
+                        <div class="var-title">🔄 Opções / Máquinas</div>
+                        <div class="var-text">Stiff com Halteres ou Mesa Flexora (Leg Curl) se tiver dor lombar.</div>
+                    </div>
                     <div class="tech-guide">
                         <div class="guide-box success">
                             <div class="guide-title">Execução</div>
@@ -514,7 +509,6 @@
                             <div class="guide-title">Erros Comuns</div>
                             <ul class="guide-list">
                                 <li>Dobrar as costas (fazer um "C").</li>
-                                <li>Agachar em vez de apenas dobrar o quadril.</li>
                             </ul>
                         </div>
                     </div>
@@ -524,13 +518,18 @@
             
             <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
-                    <div>
+                    <div class="header-content">
                         <div class="ex-name">Panturrilha Leg Press</div>
+                        <div class="ex-eng">Calf Raise on Leg Press</div>
                         <div class="ex-meta">5 Séries x 15 Reps</div>
                     </div>
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
+                    <div class="var-box">
+                        <div class="var-title">🔄 Opções / Máquinas</div>
+                        <div class="var-text">Panturrilha Sentado (Seated Calf) ou Em Pé na Máquina (Standing Calf).</div>
+                    </div>
                     <div class="tech-guide">
                         <div class="guide-box success">
                             <div class="guide-title">Execução</div>
@@ -551,13 +550,18 @@
 
             <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
-                    <div>
+                    <div class="header-content">
                         <div class="ex-name">Desenv. Halteres</div>
+                        <div class="ex-eng">Dumbbell Shoulder Press</div>
                         <div class="ex-meta">4 Séries x 8-12 Reps</div>
                     </div>
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
+                    <div class="var-box">
+                        <div class="var-title">🔄 Opções / Máquinas</div>
+                        <div class="var-text">Desenvolvimento Máquina, Barra (Military Press) ou Smith.</div>
+                    </div>
                     <div class="tech-guide">
                         <div class="guide-box success">
                             <div class="guide-title">Execução</div>
@@ -580,14 +584,19 @@
 
             <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
-                    <div>
+                    <div class="header-content">
                         <div class="ex-name">Elevação Lateral</div>
+                        <div class="ex-eng">Lateral Raise</div>
                         <div class="ex-meta">4 Séries x 12-15 Reps</div>
                     </div>
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                     <div class="tech-guide">
+                    <div class="var-box">
+                        <div class="var-title">🔄 Opções / Máquinas</div>
+                        <div class="var-text">Polia (Cable Lateral Raise) ou Máquina de Elevação Lateral.</div>
+                    </div>
+                    <div class="tech-guide">
                         <div class="guide-box success">
                             <div class="guide-title">Execução</div>
                             <ul class="guide-list">
@@ -611,18 +620,23 @@
 
             <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
-                    <div>
+                    <div class="header-content">
                         <div class="ex-name">Tríceps Corda + Rosca</div>
+                        <div class="ex-eng">Rope Pushdown + Bicep Curl</div>
                         <div class="ex-meta">4 Séries x 10-12 Reps</div>
                     </div>
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
+                    <div class="var-box">
+                        <div class="var-title">🔄 Opções / Máquinas</div>
+                        <div class="var-text">Tríceps Barra Reta + Rosca com Halteres.</div>
+                    </div>
                     <div class="tech-guide">
                         <div class="guide-box success">
                             <div class="guide-title">Execução</div>
                             <ul class="guide-list">
-                                <li>Tríceps: Cotovelo colado na costela. Abra a corda no final.</li>
+                                <li>Tríceps: Cotovelo colado na costela.</li>
                                 <li>Bíceps: Não balance o corpo.</li>
                             </ul>
                         </div>
@@ -633,25 +647,24 @@
 
             <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
-                    <div>
+                    <div class="header-content">
                         <div class="ex-name">Testa + Alternada</div>
+                        <div class="ex-eng">Skullcrusher + Alt. Curl</div>
                         <div class="ex-meta">3 Séries x 10-12 Reps</div>
                     </div>
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
+                    <div class="var-box">
+                        <div class="var-title">🔄 Opções / Máquinas</div>
+                        <div class="var-text">Tríceps Francês + Rosca Martelo.</div>
+                    </div>
                     <div class="tech-guide">
                         <div class="guide-box success">
                             <div class="guide-title">Execução</div>
                             <ul class="guide-list">
-                                <li>Testa: Barra desce em direção à testa/topo da cabeça.</li>
-                                <li>Alternada: Gire o punho na subida (supinação).</li>
-                            </ul>
-                        </div>
-                        <div class="guide-box error">
-                            <div class="guide-title">Erros Comuns</div>
-                            <ul class="guide-list">
-                                <li>Testa: Abrir os cotovelos para os lados.</li>
+                                <li>Testa: Barra desce na testa.</li>
+                                <li>Alternada: Gire o punho na subida.</li>
                             </ul>
                         </div>
                     </div>
@@ -661,13 +674,18 @@
             
              <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
-                    <div>
+                    <div class="header-content">
                         <div class="ex-name">Encolhimento</div>
+                        <div class="ex-eng">Dumbbell Shrugs</div>
                         <div class="ex-meta">4 Séries x 15 Reps</div>
                     </div>
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
+                    <div class="var-box">
+                        <div class="var-title">🔄 Opções / Máquinas</div>
+                        <div class="var-text">Encolhimento no Smith ou Barra Livre.</div>
+                    </div>
                     <div class="tech-guide">
                         <div class="guide-box success">
                             <div class="guide-title">Execução</div>
@@ -679,7 +697,7 @@
                         <div class="guide-box error">
                             <div class="guide-title">Erros Comuns</div>
                             <ul class="guide-list">
-                                <li>Girar os ombros (muito perigoso para o manguito). Faça movimento reto.</li>
+                                <li>Girar os ombros (muito perigoso).</li>
                             </ul>
                         </div>
                     </div>
@@ -692,16 +710,18 @@
         <div id="D" class="tab-content">
             <div class="cardio-hero">
                 <h2>Simulador de Escada</h2>
+                <div style="font-size: 0.9rem; opacity: 0.7; margin-top:-5px">Stairmaster / Stepmill</div>
                 <div style="font-size: 3rem; font-weight: 800; margin: 10px 0;">30 <span style="font-size:1rem; opacity:0.7">MIN</span></div>
                 <p>Intensidade Moderada</p>
             </div>
 
-            <div class="section-title">Recovery</div>
+            <div class="section-title">Recuperação</div>
 
             <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
-                    <div>
+                    <div class="header-content">
                         <div class="ex-name">Alongamento Total</div>
+                        <div class="ex-eng">Full Body Stretching</div>
                         <div class="ex-meta">15 Minutos</div>
                     </div>
                     <div class="toggle-btn">▼</div>
@@ -723,8 +743,9 @@
 
             <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
-                    <div>
+                    <div class="header-content">
                         <div class="ex-name">Abd. Remador</div>
+                        <div class="ex-eng">V-Up Abs</div>
                         <div class="ex-meta">3 Séries x 15 Reps</div>
                     </div>
                     <div class="toggle-btn">▼</div>
@@ -751,13 +772,13 @@
         </button>
         <button class="nav-item" onclick="openTab('D')">
             <div class="nav-icon">💧</div>
-            <span>Cardio</span>
+            <span>Recup.</span>
         </button>
     </nav>
 
     <script>
         function openTab(tabName) {
-            const titles = {'A': 'Treino A', 'B': 'Treino B', 'C': 'Treino C', 'D': 'Cardio'};
+            const titles = {'A': 'Treino A', 'B': 'Treino B', 'C': 'Treino C', 'D': 'Recuperação'};
             document.getElementById('page-title').innerText = titles[tabName];
 
             var i, tabcontent, navitems;
