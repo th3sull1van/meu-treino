@@ -2,291 +2,291 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Meu Treino Otimizado</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <!-- Configurações Web App iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Treino Pro">
+    <link rel="apple-touch-icon" href="https://img.icons8.com/3d-fluency/188/dumbbell.png">
+    
+    <title>Treino Liquid</title>
     <style>
         :root {
-            --bg-color: #121212;
-            --card-bg: #1e1e1e;
-            --text-primary: #ffffff;
-            --text-secondary: #b0b0b0;
-            --accent: #ff9500; /* Laranja estilo app fitness */
-            --danger: #ff453a;
+            --glass-bg: rgba(28, 28, 30, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --text-primary: #FFFFFF;
+            --text-secondary: rgba(235, 235, 245, 0.6);
+            --accent-mesh: linear-gradient(135deg, #FF9F0A, #FF375F, #BF5AF2);
+            --danger: #FF453A;
+            --nav-blur: rgba(20, 20, 22, 0.8);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-        
-        body { background-color: var(--bg-color); color: var(--text-primary); padding-bottom: 80px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
-        /* Header */
-        header {
-            background-color: var(--card-bg);
-            padding: 20px;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        }
-        h1 { font-size: 1.2rem; font-weight: 700; color: var(--accent); }
-
-        /* Navigation Tabs */
-        .tabs {
-            display: flex;
-            justify-content: space-around;
-            background-color: var(--card-bg);
-            padding: 10px 0;
-            border-bottom: 1px solid #333;
-        }
-        .tab-btn {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            font-size: 1rem;
-            font-weight: 600;
-            padding: 10px;
-            cursor: pointer;
+        body { 
+            background-color: #000;
+            color: var(--text-primary); 
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+            padding-bottom: 110px;
+            padding-top: env(safe-area-inset-top);
+            overflow-x: hidden;
+            min-height: 100vh;
             position: relative;
         }
-        .tab-btn.active { color: var(--accent); }
-        .tab-btn.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 3px;
-            background-color: var(--accent);
-            border-radius: 2px;
+
+        /* --- BACKGROUND LIQUID ANIMATION --- */
+        .liquid-bg {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1; overflow: hidden; background: #050505;
+        }
+        .orb {
+            position: absolute; border-radius: 50%;
+            filter: blur(80px); opacity: 0.6;
+            animation: float 20s infinite ease-in-out;
+        }
+        .orb-1 { width: 300px; height: 300px; background: #FF375F; top: -50px; left: -50px; animation-delay: 0s; }
+        .orb-2 { width: 400px; height: 400px; background: #5E5CE6; bottom: 10%; right: -100px; animation-delay: -5s; }
+        .orb-3 { width: 250px; height: 250px; background: #FF9F0A; top: 40%; left: 30%; animation-delay: -10s; opacity: 0.4; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0, 0) scale(1); }
         }
 
-        /* Content */
-        .tab-content { display: none; padding: 15px; animation: fadeIn 0.3s ease; }
+        /* --- UI COMPONENTS --- */
+        header {
+            padding: 20px 24px 10px;
+            position: sticky; top: 0; z-index: 100;
+        }
+        
+        h1 { 
+            font-size: 2.2rem; font-weight: 800; letter-spacing: -0.02em;
+            background: var(--accent-mesh); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 20px rgba(255, 55, 95, 0.3);
+        }
+        .subtitle { font-size: 0.85rem; color: var(--text-secondary); font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.8; }
+
+        main { padding: 15px 20px; }
+
+        .tab-content { display: none; animation: fadeIn 0.5s ease; }
         .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .section-title { 
+            font-size: 1.2rem; color: white; font-weight: 700; 
+            margin: 25px 0 15px 5px; text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
 
-        .day-title { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* Exercise Card */
+        /* GLASS CARDS */
         .card {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            margin-bottom: 15px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            margin-bottom: 16px;
             overflow: hidden;
-            border: 1px solid #333;
-            transition: transform 0.2s;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        .card:active { transform: scale(0.98); }
+        .card:active { transform: scale(0.96); background: rgba(40, 40, 42, 0.7); }
 
-        .card-header {
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
+        .card-header { padding: 20px; display: flex; justify-content: space-between; align-items: center; }
+        
+        .ex-name { font-weight: 700; font-size: 1.1rem; margin-bottom: 5px; letter-spacing: -0.01em; }
+        .ex-meta { font-size: 0.9rem; color: #bbaaff; font-weight: 500; }
+        
+        .toggle-btn { 
+            width: 36px; height: 36px; border-radius: 50%; 
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            display: flex; align-items: center; justify-content: center; color: white;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .ex-name { font-weight: 600; font-size: 1rem; }
-        .ex-meta { font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px; }
-        .toggle-icon { font-size: 1.2rem; color: var(--accent); transition: transform 0.3s; }
-        .card.open .toggle-icon { transform: rotate(180deg); }
+        .card.open .toggle-btn { transform: rotate(180deg); background: var(--text-primary); color: black; }
 
-        /* Card Details (Hidden by default) */
-        .card-body {
-            display: none;
-            padding: 0 15px 15px 15px;
-            border-top: 1px solid #333;
-            background-color: #252525;
-        }
+        .card-body { display: none; padding: 0 20px 24px; border-top: 1px solid rgba(255,255,255,0.05); }
         .card.open .card-body { display: block; }
 
-        .tags { display: flex; gap: 10px; margin: 10px 0; }
-        .tag { font-size: 0.75rem; padding: 4px 8px; border-radius: 4px; background-color: #333; color: #fff; }
-
-        .notes { font-size: 0.9rem; color: #ddd; margin-bottom: 15px; line-height: 1.4; }
-        
-        .alt-section {
-            background-color: #333;
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 15px;
+        .tags { display: flex; gap: 8px; margin: 15px 0; }
+        .tag { 
+            font-size: 0.7rem; padding: 6px 12px; border-radius: 12px; 
+            background: rgba(255, 255, 255, 0.1); color: #fff; font-weight: 600; 
+            border: 1px solid rgba(255,255,255,0.1);
         }
-        .alt-title { font-size: 0.75rem; color: var(--accent); font-weight: bold; margin-bottom: 5px; }
-        .alt-text { font-size: 0.85rem; color: #ccc; }
+        
+        .notes { font-size: 0.95rem; color: #d0d0d0; line-height: 1.6; margin-bottom: 20px; }
 
         .btn-video {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            padding: 12px;
-            background-color: var(--accent);
-            color: #000;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            cursor: pointer;
+            display: block; width: 100%; padding: 16px; text-align: center;
+            background: var(--accent-mesh); border-radius: 14px;
+            color: white; font-weight: 700; text-decoration: none; font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(255, 55, 95, 0.4);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
-        .btn-video svg { width: 20px; margin-right: 8px; }
 
-        /* Cardio Section specific */
-        .cardio-box { border: 1px solid var(--accent); padding: 15px; border-radius: 12px; text-align: center; margin-bottom: 20px; }
-        .cardio-time { font-size: 2rem; font-weight: bold; color: var(--accent); margin: 10px 0; }
+        /* CARDIO HERO */
+        .cardio-hero {
+            background: rgba(20, 20, 20, 0.6);
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            padding: 30px; border-radius: 24px; text-align: center; margin-bottom: 25px;
+            position: relative; overflow: hidden;
+        }
+        .cardio-hero::before {
+            content:''; position: absolute; top:0; left:0; width: 100%; height: 5px;
+            background: var(--accent-mesh);
+        }
 
+        /* NAVIGATION BAR */
+        .glass-nav {
+            position: fixed; bottom: 25px; left: 20px; right: 20px;
+            height: 70px; border-radius: 25px;
+            background: var(--nav-blur);
+            backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255,255,255,0.15);
+            display: flex; justify-content: space-around; align-items: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            z-index: 999;
+        }
+
+        .nav-item {
+            background: none; border: none; color: rgba(255,255,255,0.5);
+            font-size: 0.7rem; font-weight: 600;
+            display: flex; flex-direction: column; align-items: center; gap: 5px;
+            width: 60px; transition: 0.3s;
+        }
+        .nav-icon { font-size: 1.4rem; filter: grayscale(100%); transition: 0.3s; }
+        
+        .nav-item.active { color: white; }
+        .nav-item.active .nav-icon { filter: grayscale(0%); transform: translateY(-3px) scale(1.1); text-shadow: 0 0 15px rgba(255,255,255,0.5); }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>MEU TREINO PRO</h1>
-    </header>
-
-    <div class="tabs">
-        <button class="tab-btn active" onclick="openTab('A')">A</button>
-        <button class="tab-btn" onclick="openTab('B')">B</button>
-        <button class="tab-btn" onclick="openTab('C')">C</button>
-        <button class="tab-btn" onclick="openTab('D')">D</button>
+    <!-- Liquid Background -->
+    <div class="liquid-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
     </div>
+
+    <header>
+        <div class="subtitle">Personal Trainer AI</div>
+        <h1 id="page-title">Treino A</h1>
+    </header>
 
     <main>
         <!-- TREINO A -->
         <div id="A" class="tab-content active">
-            <div class="day-title">Peito, Costas & Abdômen</div>
+            <div class="section-title">Peito & Costas</div>
 
-            <!-- Exercicio 1 -->
             <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
                     <div>
-                        <div class="ex-name">Supino Inclinado com Halteres</div>
+                        <div class="ex-name">Supino Inclinado Halter</div>
                         <div class="ex-meta">4 Séries x 8-12 Reps</div>
                     </div>
-                    <div class="toggle-icon">▼</div>
+                    <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <div class="tags"><span class="tag">Foco: Peitoral Superior</span><span class="tag">Descanso: 2 min</span></div>
-                    <p class="notes">Foque na amplitude máxima. Controle a descida. Carga pesada.</p>
-                    <div class="alt-section">
-                        <div class="alt-title">🔄 ALTERNATIVA</div>
-                        <div class="alt-text">Supino Inclinado na Máquina ou Smith.</div>
-                    </div>
-                    <a href="https://www.youtube.com/results?search_query=Supino+Inclinado+com+Halteres+execucao" target="_blank" class="btn-video">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/></svg>
-                        Ver Execução
-                    </a>
+                    <div class="tags"><span class="tag">Força</span><span class="tag">Descanso: 2 min</span></div>
+                    <p class="notes">Priorize a amplitude total. Controle bem a descida (3 segundos) e exploda na subida.</p>
+                    <a href="https://www.youtube.com/results?search_query=Supino+Inclinado+com+Halteres+execucao" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
 
-            <!-- Exercicio 2 -->
             <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
                     <div>
                         <div class="ex-name">Puxada Alta (Pulldown)</div>
                         <div class="ex-meta">4 Séries x 10-12 Reps</div>
                     </div>
-                    <div class="toggle-icon">▼</div>
+                    <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <div class="tags"><span class="tag">Foco: Grande Dorsal</span></div>
-                    <p class="notes">Pegada um pouco mais aberta que os ombros. Puxe em direção ao peito superior.</p>
-                    <div class="alt-section">
-                        <div class="alt-title">🔄 ALTERNATIVA</div>
-                        <div class="alt-text">Barra Fixa (com ou sem graviton).</div>
-                    </div>
-                    <a href="https://www.youtube.com/results?search_query=Puxada+Alta+Pulldown+execucao" target="_blank" class="btn-video">Ver Execução</a>
+                    <p class="notes">Incline levemente o tronco. Foco em esmagar as dorsais.</p>
+                    <a href="https://www.youtube.com/results?search_query=Puxada+Alta+Pulldown+execucao" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
 
-             <!-- Exercicio 3 -->
-             <div class="card" onclick="toggleCard(this)">
+            <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
                     <div>
-                        <div class="ex-name">Supino Reto com Barra</div>
+                        <div class="ex-name">Supino Reto Barra</div>
                         <div class="ex-meta">3 Séries x 6-10 Reps</div>
                     </div>
-                    <div class="toggle-icon">▼</div>
+                    <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <p class="notes">Exercício base de força. Mantenha os cotovelos levemente fechados para proteger o ombro.</p>
-                    <div class="alt-section">
-                        <div class="alt-title">🔄 ALTERNATIVA</div>
-                        <div class="alt-text">Supino Reto com Halteres ou Máquina Articulada.</div>
-                    </div>
-                    <a href="https://www.youtube.com/results?search_query=Supino+Reto+Barra+tecnica" target="_blank" class="btn-video">Ver Execução</a>
+                    <p class="notes">Carga Alta. Escápulas retraídas.</p>
+                    <a href="https://www.youtube.com/results?search_query=Supino+Reto+Barra+tecnica" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
 
-            <!-- Exercicio 4 -->
             <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
                     <div>
-                        <div class="ex-name">Remada Curvada ou Cavalinho</div>
+                        <div class="ex-name">Remada Curvada</div>
                         <div class="ex-meta">3 Séries x 8-10 Reps</div>
                     </div>
-                    <div class="toggle-icon">▼</div>
+                    <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <p class="notes">Mantenha a coluna reta. Puxe a barra/peso em direção ao quadril.</p>
-                    <div class="alt-section">
-                        <div class="alt-title">🔄 ALTERNATIVA</div>
-                        <div class="alt-text">Remada na Máquina ou Serrote com Halter.</div>
-                    </div>
-                    <a href="https://www.youtube.com/results?search_query=Remada+Cavalinho+execucao" target="_blank" class="btn-video">Ver Execução</a>
+                    <p class="notes">Tronco paralelo ao chão. Puxe na direção do umbigo.</p>
+                    <a href="https://www.youtube.com/results?search_query=Remada+Curvada+barra+execucao" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
 
-            <!-- Exercicio 5 -->
+            <div class="section-title">Metabólico</div>
+
             <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
                     <div>
-                        <div class="ex-name">Bi-Set: Voador + Crucifixo Inverso</div>
-                        <div class="ex-meta">3 Séries x 12-15 Reps</div>
+                        <div class="ex-name">Bi-Set: Voador + Inv.</div>
+                        <div class="ex-meta">3 Séries x 15 Reps</div>
                     </div>
-                    <div class="toggle-icon">▼</div>
+                    <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <div class="tags"><span class="tag">Metabólico</span><span class="tag">Sem Descanso</span></div>
-                    <p class="notes">Faça o Voador (Peito) e imediatamente o Crucifixo Inverso (Costas/Posterior de Ombro).</p>
-                    <a href="https://www.youtube.com/results?search_query=Crucifixo+maquina+voador" target="_blank" class="btn-video">Ver Execução</a>
+                    <div class="tags"><span class="tag">Sem Descanso</span></div>
+                    <p class="notes">Crucifixo Máquina (Peito) + Crucifixo Inverso (Costas).</p>
+                    <a href="https://www.youtube.com/results?search_query=Crucifixo+inverso+maquina" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
 
-            <!-- Abdomen -->
             <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
                     <div>
-                        <div class="ex-name">Abdominal Infra + Prancha</div>
-                        <div class="ex-meta">3 Séries até a falha</div>
+                        <div class="ex-name">Abd. Infra + Prancha</div>
+                        <div class="ex-meta">3 Séries Falha</div>
                     </div>
-                    <div class="toggle-icon">▼</div>
+                    <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <p class="notes">Elevação de pernas seguida de isometria na prancha.</p>
-                    <a href="https://www.youtube.com/results?search_query=Abdominal+infra+solo" target="_blank" class="btn-video">Ver Execução</a>
+                    <a href="https://www.youtube.com/results?search_query=Abdominal+infra+solo" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
-
         </div>
 
         <!-- TREINO B -->
         <div id="B" class="tab-content">
-            <div class="day-title">Pernas Completo (Leg Day)</div>
+            <div class="section-title">Membros Inferiores</div>
 
             <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
                     <div>
-                        <div class="ex-name">Agachamento (Livre ou Smith)</div>
+                        <div class="ex-name">Agachamento</div>
                         <div class="ex-meta">4 Séries x 8-10 Reps</div>
                     </div>
-                    <div class="toggle-icon">▼</div>
+                    <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
                     <div class="tags"><span class="tag">Principal</span></div>
-                    <p class="notes">Desça devagar. Evite fechar os joelhos ao subir.</p>
-                    <div class="alt-section"><div class="alt-title">🔄 ALTERNATIVA</div><div class="alt-text">Hack Squat.</div></div>
-                    <a href="https://www.youtube.com/results?search_query=Agachamento+Smith+execucao" target="_blank" class="btn-video">Ver Execução</a>
+                    <p class="notes">Livre ou Smith. Desça até 90 graus.</p>
+                    <a href="https://www.youtube.com/results?search_query=Agachamento+Smith+execucao" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
 
@@ -296,11 +296,11 @@
                         <div class="ex-name">Leg Press 45º</div>
                         <div class="ex-meta">4 Séries x 10-12 Reps</div>
                     </div>
-                    <div class="toggle-icon">▼</div>
+                    <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <p class="notes">Pés no meio da plataforma. Não estenda totalmente o joelho no final.</p>
-                    <a href="https://www.youtube.com/results?search_query=Leg+Press+45+execucao" target="_blank" class="btn-video">Ver Execução</a>
+                    <p class="notes">Não travar joelhos na subida.</p>
+                    <a href="https://www.youtube.com/results?search_query=Leg+Press+45+execucao" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
 
@@ -308,13 +308,13 @@
                 <div class="card-header">
                     <div>
                         <div class="ex-name">Cadeira Extensora</div>
-                        <div class="ex-meta">3 Séries + Drop-set</div>
+                        <div class="ex-meta">3 Séries + Drop</div>
                     </div>
-                    <div class="toggle-icon">▼</div>
+                    <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <p class="notes">Na última série, reduza o peso e faça até não aguentar mais.</p>
-                    <a href="https://www.youtube.com/results?search_query=Cadeira+Extensora+dropset" target="_blank" class="btn-video">Ver Execução</a>
+                    <p class="notes">Última série drop-set até a falha.</p>
+                    <a href="https://www.youtube.com/results?search_query=Cadeira+Extensora+tecnica" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
 
@@ -324,48 +324,44 @@
                         <div class="ex-name">Stiff com Barra</div>
                         <div class="ex-meta">4 Séries x 10-12 Reps</div>
                     </div>
-                    <div class="toggle-icon">▼</div>
+                    <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <div class="tags"><span class="tag">Posterior</span></div>
-                    <p class="notes">Coluna travada. Sinta alongar a parte de trás da coxa.</p>
-                    <div class="alt-section"><div class="alt-title">🔄 ALTERNATIVA</div><div class="alt-text">Mesa Flexora.</div></div>
-                    <a href="https://www.youtube.com/results?search_query=Stiff+com+barra+execucao" target="_blank" class="btn-video">Ver Execução</a>
+                    <p class="notes">Foco no posterior. Coluna reta.</p>
+                    <a href="https://www.youtube.com/results?search_query=Stiff+com+barra+execucao" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
-
+            
             <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
                     <div>
-                        <div class="ex-name">Panturrilha no Leg Press</div>
+                        <div class="ex-name">Panturrilha Leg Press</div>
                         <div class="ex-meta">5 Séries x 15 Reps</div>
                     </div>
-                    <div class="toggle-icon">▼</div>
+                    <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <p class="notes">Movimento completo. Segure 1 seg no topo e 1 seg embaixo.</p>
-                    <a href="https://www.youtube.com/results?search_query=Panturrilha+leg+press" target="_blank" class="btn-video">Ver Execução</a>
+                    <p class="notes">Movimento lento. Segure no topo.</p>
+                    <a href="https://www.youtube.com/results?search_query=Panturrilha+leg+press" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
         </div>
 
         <!-- TREINO C -->
         <div id="C" class="tab-content">
-            <div class="day-title">Ombros e Braços</div>
+            <div class="section-title">Ombros & Braços</div>
 
             <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
                     <div>
-                        <div class="ex-name">Desenvolvimento com Halteres</div>
+                        <div class="ex-name">Desenv. Halteres</div>
                         <div class="ex-meta">4 Séries x 8-12 Reps</div>
                     </div>
-                    <div class="toggle-icon">▼</div>
+                    <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <div class="tags"><span class="tag">Ombros</span></div>
-                    <p class="notes">Banco a 75º ou 90º. Não bata os halteres em cima.</p>
-                    <div class="alt-section"><div class="alt-title">🔄 ALTERNATIVA</div><div class="alt-text">Desenvolvimento Máquina ou Barra.</div></div>
-                    <a href="https://www.youtube.com/results?search_query=Desenvolvimento+halteres+sentado" target="_blank" class="btn-video">Ver Execução</a>
+                    <p class="notes">Banco 75º. Não bata os pesos.</p>
+                    <a href="https://www.youtube.com/results?search_query=Desenvolvimento+halteres+sentado" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
 
@@ -375,126 +371,139 @@
                         <div class="ex-name">Elevação Lateral</div>
                         <div class="ex-meta">4 Séries x 12-15 Reps</div>
                     </div>
-                    <div class="toggle-icon">▼</div>
+                    <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <p class="notes">Foque em levantar os cotovelos, não as mãos.</p>
-                    <a href="https://www.youtube.com/results?search_query=Elevacao+lateral+halteres" target="_blank" class="btn-video">Ver Execução</a>
+                    <p class="notes">Levante os cotovelos, não as mãos.</p>
+                    <a href="https://www.youtube.com/results?search_query=Elevacao+lateral+halteres" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
+
+            <div class="section-title">Bi-Sets (Sem Descanso)</div>
 
             <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
                     <div>
-                        <div class="ex-name">Bi-set: Tríceps Corda + Rosca Direta</div>
+                        <div class="ex-name">Tríceps Corda + Rosca</div>
                         <div class="ex-meta">4 Séries x 10-12 Reps</div>
                     </div>
-                    <div class="toggle-icon">▼</div>
+                    <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <p class="notes">Sem descanso entre tríceps e bíceps.</p>
-                    <a href="https://www.youtube.com/results?search_query=Triceps+corda+execucao" target="_blank" class="btn-video">Ver Execução</a>
+                    <p class="notes">Tríceps Corda + Rosca Direta.</p>
+                    <a href="https://www.youtube.com/results?search_query=Triceps+corda+execucao" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
 
             <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
                     <div>
-                        <div class="ex-name">Bi-set: Tríceps Testa + Rosca Alternada</div>
+                        <div class="ex-name">Testa + Alternada</div>
                         <div class="ex-meta">3 Séries x 10-12 Reps</div>
                     </div>
-                    <div class="toggle-icon">▼</div>
+                    <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <p class="notes">Controle o movimento na descida da barra/halter.</p>
-                    <a href="https://www.youtube.com/results?search_query=Triceps+testa+barra+w" target="_blank" class="btn-video">Ver Execução</a>
+                    <p class="notes">Tríceps Testa + Rosca Alternada.</p>
+                    <a href="https://www.youtube.com/results?search_query=Triceps+testa+com+barra" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
             
-            <div class="card" onclick="toggleCard(this)">
+             <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
                     <div>
-                        <div class="ex-name">Encolhimento de Ombros</div>
+                        <div class="ex-name">Encolhimento</div>
                         <div class="ex-meta">4 Séries x 15 Reps</div>
                     </div>
-                    <div class="toggle-icon">▼</div>
+                    <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <p class="notes">Para trapézio. Segure 2 segundos no topo.</p>
-                    <a href="https://www.youtube.com/results?search_query=Encolhimento+de+ombros+halteres" target="_blank" class="btn-video">Ver Execução</a>
+                    <p class="notes">Trapézio com Halteres.</p>
+                    <a href="https://www.youtube.com/results?search_query=Encolhimento+de+ombros+halteres" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
         </div>
 
         <!-- TREINO D -->
         <div id="D" class="tab-content">
-            <div class="day-title">Descanso Ativo & Cardio</div>
-            
-            <div class="cardio-box">
-                <h3>SIMULADOR DE ESCADA</h3>
-                <div class="cardio-time">30 - 45 Min</div>
+            <div class="cardio-hero">
+                <h2>Simulador de Escada</h2>
+                <div style="font-size: 3rem; font-weight: 800; margin: 10px 0;">30 <span style="font-size:1rem; opacity:0.7">MIN</span></div>
                 <p>Intensidade Moderada</p>
             </div>
 
+            <div class="section-title">Recovery</div>
+
             <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
                     <div>
-                        <div class="ex-name">Alongamento Completo</div>
-                        <div class="ex-meta">Membros Inferiores e Costas</div>
+                        <div class="ex-name">Alongamento Total</div>
+                        <div class="ex-meta">15 Minutos</div>
                     </div>
-                    <div class="toggle-icon">▼</div>
+                    <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <p class="notes">Foque em mobilidade de quadril e coluna.</p>
-                    <a href="https://www.youtube.com/results?search_query=Rotina+alongamento+corpo+todo" target="_blank" class="btn-video">Ver Rotina</a>
+                    <p class="notes">Relaxe a lombar e posteriores.</p>
+                    <a href="https://www.youtube.com/results?search_query=alongamento+corpo+todo+diario" target="_blank" class="btn-video">▶ Ver Rotina</a>
                 </div>
             </div>
 
             <div class="card" onclick="toggleCard(this)">
                 <div class="card-header">
                     <div>
-                        <div class="ex-name">Abdominal Remador</div>
+                        <div class="ex-name">Abd. Remador</div>
                         <div class="ex-meta">3 Séries x 15 Reps</div>
                     </div>
-                    <div class="toggle-icon">▼</div>
+                    <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <a href="https://www.youtube.com/results?search_query=abdominal+remador" target="_blank" class="btn-video">Ver Execução</a>
+                    <a href="https://www.youtube.com/results?search_query=abdominal+remador" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
         </div>
     </main>
 
+    <nav class="glass-nav">
+        <button class="nav-item active" onclick="openTab('A')">
+            <div class="nav-icon">🔥</div>
+            <span>Treino A</span>
+        </button>
+        <button class="nav-item" onclick="openTab('B')">
+            <div class="nav-icon">⚡</div>
+            <span>Treino B</span>
+        </button>
+        <button class="nav-item" onclick="openTab('C')">
+            <div class="nav-icon">💪</div>
+            <span>Treino C</span>
+        </button>
+        <button class="nav-item" onclick="openTab('D')">
+            <div class="nav-icon">💧</div>
+            <span>Cardio</span>
+        </button>
+    </nav>
+
     <script>
         function openTab(tabName) {
-            // Esconde todos os conteúdos
-            var i, tabcontent, tablinks;
+            const titles = {'A': 'Treino A', 'B': 'Treino B', 'C': 'Treino C', 'D': 'Cardio'};
+            document.getElementById('page-title').innerText = titles[tabName];
+
+            var i, tabcontent, navitems;
             tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].classList.remove("active");
-            }
+            for (i = 0; i < tabcontent.length; i++) { tabcontent[i].classList.remove("active"); }
             
-            // Remove classe active dos botões
-            tablinks = document.getElementsByClassName("tab-btn");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].classList.remove("active");
-            }
+            navitems = document.getElementsByClassName("nav-item");
+            for (i = 0; i < navitems.length; i++) { navitems[i].classList.remove("active"); }
             
-            // Mostra o atual
             document.getElementById(tabName).classList.add("active");
             
-            // Adiciona classe active no botão clicado (busca pelo texto do botão seria uma forma, mas aqui vamos pegar pelo evento se quisesse passar 'event', mas vamos simplificar pegando o indice correspondente se A=0, B=1...)
-            // Simplificação: vamos iterar para achar o botão com o texto igual
-            for (i = 0; i < tablinks.length; i++) {
-                if(tablinks[i].textContent === tabName) {
-                    tablinks[i].classList.add("active");
-                }
-            }
+            const indexMap = { 'A': 0, 'B': 1, 'C': 2, 'D': 3 };
+            navitems[indexMap[tabName]].classList.add("active");
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function toggleCard(card) {
-            // Se já estiver aberto, fecha. Se não, fecha os outros e abre este (efeito acordeão opcional, aqui deixei abrir multiplos)
-            card.classList.toggle("open");
+            card.classList.toggle('open');
         }
     </script>
 </body>
