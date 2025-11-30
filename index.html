@@ -21,24 +21,19 @@
     <style>
         :root {
             --glass-bg: rgba(30, 30, 32, 0.70);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.08);
             --text-primary: #FFFFFF;
             --text-secondary: rgba(235, 235, 245, 0.6);
             --accent-mesh: linear-gradient(135deg, #FF9F0A, #FF375F, #BF5AF2);
+            --success-color: #30d158;
+            --error-color: #ff453a;
             --nav-blur: rgba(20, 20, 22, 0.85);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
-        /* --- Ocultar Barra de Rolagem (Scrollbar Hide) --- */
-        html, body {
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* IE and Edge */
-        }
-        
-        body::-webkit-scrollbar {
-            display: none; /* Chrome, Safari and Opera */
-        }
+        html, body { scrollbar-width: none; -ms-overflow-style: none; }
+        body::-webkit-scrollbar { display: none; }
 
         body { 
             background-color: #000;
@@ -51,7 +46,7 @@
             position: relative;
         }
 
-        /* --- Liquid Background Animation --- */
+        /* --- Liquid Background --- */
         .liquid-bg {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: -1; overflow: hidden; background: #050505;
@@ -60,7 +55,7 @@
             position: absolute; border-radius: 50%;
             filter: blur(90px); opacity: 0.5;
             animation: float 25s infinite ease-in-out;
-            will-change: transform; /* Otimização de performance */
+            will-change: transform;
         }
         .orb-1 { width: 350px; height: 350px; background: #FF375F; top: -10%; left: -20%; animation-delay: 0s; }
         .orb-2 { width: 450px; height: 450px; background: #5E5CE6; bottom: 0%; right: -20%; animation-delay: -5s; }
@@ -73,12 +68,8 @@
             100% { transform: translate(0, 0) scale(1); }
         }
 
-        /* --- UI COMPONENTS --- */
-        header {
-            padding: 20px 24px 10px;
-            position: sticky; top: 0; z-index: 100;
-        }
-        
+        /* --- UI Components --- */
+        header { padding: 20px 24px 10px; position: sticky; top: 0; z-index: 100; }
         h1 { 
             font-size: 2.2rem; font-weight: 800; letter-spacing: -0.02em;
             background: var(--accent-mesh); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -109,42 +100,91 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
             transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        .card:active { transform: scale(0.96); background: rgba(50, 50, 52, 0.6); }
+        .card:active { transform: scale(0.98); background: rgba(50, 50, 52, 0.6); }
 
         .card-header { padding: 22px; display: flex; justify-content: space-between; align-items: center; }
-        
-        .ex-name { font-weight: 700; font-size: 1.1rem; margin-bottom: 5px; letter-spacing: -0.01em; color: #fff; }
+        .ex-name { font-weight: 700; font-size: 1.1rem; margin-bottom: 5px; color: #fff; }
         .ex-meta { font-size: 0.9rem; color: #bbaaff; font-weight: 500; }
         
         .toggle-btn { 
             width: 36px; height: 36px; border-radius: 50%; 
             background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
             display: flex; align-items: center; justify-content: center; color: white;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: 0.4s;
         }
         .card.open .toggle-btn { transform: rotate(180deg); background: #fff; color: black; }
 
         .card-body { display: none; padding: 0 22px 24px; border-top: 1px solid rgba(255,255,255,0.05); }
         .card.open .card-body { display: block; }
 
-        .tags { display: flex; gap: 8px; margin: 15px 0; }
-        .tag { 
-            font-size: 0.75rem; padding: 6px 12px; border-radius: 12px; 
-            background: rgba(255, 255, 255, 0.1); color: #fff; font-weight: 600; 
-            border: 1px solid rgba(255,255,255,0.1);
+        /* --- NEW TECH GUIDE STYLES (Redesigned) --- */
+        .tech-guide { display: grid; gap: 15px; margin: 20px 0; }
+        
+        .guide-box {
+            position: relative;
+            padding: 15px 15px 15px 20px;
+            border-radius: 12px;
+            overflow: hidden;
+            /* Fundo sutil gradiente */
+            background: linear-gradient(90deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%);
+        }
+
+        /* Success (Green) Variant */
+        .guide-box.success {
+            border-left: 3px solid var(--success-color);
+        }
+        .guide-box.success .guide-title { color: var(--success-color); }
+        
+        /* Error (Red) Variant */
+        .guide-box.error {
+            border-left: 3px solid var(--error-color);
+        }
+        .guide-box.error .guide-title { color: var(--error-color); }
+
+        .guide-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .guide-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
         }
         
-        .notes { font-size: 0.95rem; color: #d0d0d0; line-height: 1.6; margin-bottom: 20px; }
+        .guide-list li {
+            position: relative;
+            padding-left: 15px;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.5;
+        }
+
+        /* Bullet Points customizados */
+        .guide-box.success .guide-list li::before {
+            content: "•"; color: var(--success-color);
+            position: absolute; left: 0; top: 0; font-weight: bold;
+        }
+        .guide-box.error .guide-list li::before {
+            content: "•"; color: var(--error-color);
+            position: absolute; left: 0; top: 0; font-weight: bold;
+        }
 
         .btn-video {
             display: block; width: 100%; padding: 16px; text-align: center;
             background: var(--accent-mesh); border-radius: 16px;
             color: white; font-weight: 700; text-decoration: none; font-size: 1rem;
-            box-shadow: 0 4px 20px rgba(255, 55, 95, 0.4);
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 20px rgba(255, 55, 95, 0.4); margin-top: 15px;
         }
 
-        /* CARDIO HERO */
+        /* Cardio Hero */
         .cardio-hero {
             background: rgba(20, 20, 20, 0.5);
             border: 1px solid rgba(255,255,255,0.1);
@@ -153,12 +193,9 @@
             position: relative; overflow: hidden;
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         }
-        .cardio-hero::before {
-            content:''; position: absolute; top:0; left:0; width: 100%; height: 4px;
-            background: var(--accent-mesh);
-        }
+        .cardio-hero::before { content:''; position: absolute; top:0; left:0; width: 100%; height: 4px; background: var(--accent-mesh); }
 
-        /* NAVIGATION BAR */
+        /* Navigation */
         .glass-nav {
             position: fixed; bottom: 25px; left: 20px; right: 20px;
             height: 75px; border-radius: 25px;
@@ -177,14 +214,12 @@
             width: 60px; transition: 0.3s;
         }
         .nav-icon { font-size: 1.5rem; filter: grayscale(100%); opacity: 0.7; transition: 0.3s; }
-        
         .nav-item.active { color: white; }
         .nav-item.active .nav-icon { filter: grayscale(0%); opacity: 1; transform: translateY(-4px) scale(1.1); text-shadow: 0 0 15px rgba(255,255,255,0.6); }
     </style>
 </head>
 <body>
 
-    <!-- Liquid Background -->
     <div class="liquid-bg">
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
@@ -210,8 +245,25 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <div class="tags"><span class="tag">Força</span><span class="tag">Descanso: 2 min</span></div>
-                    <p class="notes">Priorize a amplitude total. Controle bem a descida (3 segundos) e exploda na subida.</p>
+                    <div class="tech-guide">
+                        <!-- Caixa de Execução -->
+                        <div class="guide-box success">
+                            <div class="guide-title">Execução</div>
+                            <ul class="guide-list">
+                                <li>Retraia as escápulas (estufe o peito).</li>
+                                <li>Cotovelos levemente para dentro (45º).</li>
+                                <li>Amplitude máxima na descida.</li>
+                            </ul>
+                        </div>
+                        <!-- Caixa de Erro -->
+                        <div class="guide-box error">
+                            <div class="guide-title">Erros Comuns</div>
+                            <ul class="guide-list">
+                                <li>Bater os halteres no topo (perde tensão).</li>
+                                <li>Tirar as costas do banco.</li>
+                            </ul>
+                        </div>
+                    </div>
                     <a href="https://www.youtube.com/results?search_query=Supino+Inclinado+com+Halteres+execucao" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
@@ -225,7 +277,22 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <p class="notes">Incline levemente o tronco. Foco em esmagar as dorsais.</p>
+                    <div class="tech-guide">
+                        <div class="guide-box success">
+                            <div class="guide-title">Execução</div>
+                            <ul class="guide-list">
+                                <li>Puxe com os cotovelos, não com as mãos.</li>
+                                <li>Traga a barra até o topo do peito.</li>
+                            </ul>
+                        </div>
+                        <div class="guide-box error">
+                            <div class="guide-title">Erros Comuns</div>
+                            <ul class="guide-list">
+                                <li>Usar impulso do corpo (gangorra).</li>
+                                <li>Puxar a barra até a barriga.</li>
+                            </ul>
+                        </div>
+                    </div>
                     <a href="https://www.youtube.com/results?search_query=Puxada+Alta+Pulldown+execucao" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
@@ -239,7 +306,22 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <p class="notes">Carga Alta. Escápulas retraídas.</p>
+                    <div class="tech-guide">
+                        <div class="guide-box success">
+                            <div class="guide-title">Execução</div>
+                            <ul class="guide-list">
+                                <li>Pés firmes no chão.</li>
+                                <li>Barra desce na linha dos mamilos.</li>
+                            </ul>
+                        </div>
+                        <div class="guide-box error">
+                            <div class="guide-title">Erros Comuns</div>
+                            <ul class="guide-list">
+                                <li>Abrir demais os cotovelos (lesiona ombro).</li>
+                                <li>Descer a barra no pescoço.</li>
+                            </ul>
+                        </div>
+                    </div>
                     <a href="https://www.youtube.com/results?search_query=Supino+Reto+Barra+tecnica" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
@@ -253,7 +335,22 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <p class="notes">Tronco paralelo ao chão. Puxe na direção do umbigo.</p>
+                     <div class="tech-guide">
+                        <div class="guide-box success">
+                            <div class="guide-title">Execução</div>
+                            <ul class="guide-list">
+                                <li>Coluna reta o tempo todo.</li>
+                                <li>Olhe para o chão (alinhar pescoço).</li>
+                            </ul>
+                        </div>
+                        <div class="guide-box error">
+                            <div class="guide-title">Erros Comuns</div>
+                            <ul class="guide-list">
+                                <li>Ficar muito em pé (vira encolhimento).</li>
+                                <li>Arredondar a lombar.</li>
+                            </ul>
+                        </div>
+                    </div>
                     <a href="https://www.youtube.com/results?search_query=Remada+Curvada+barra+execucao" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
@@ -269,8 +366,22 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <div class="tags"><span class="tag">Sem Descanso</span></div>
-                    <p class="notes">Crucifixo Máquina (Peito) + Crucifixo Inverso (Costas).</p>
+                    <div class="tech-guide">
+                        <div class="guide-box success">
+                            <div class="guide-title">Execução</div>
+                            <ul class="guide-list">
+                                <li>Cotovelos levemente flexionados sempre.</li>
+                                <li>Imagine que vai "abraçar uma árvore".</li>
+                            </ul>
+                        </div>
+                         <div class="guide-box error">
+                            <div class="guide-title">Erros Comuns</div>
+                            <ul class="guide-list">
+                                <li>Esticar totalmente os braços.</li>
+                                <li>Tirar o ombro do encosto.</li>
+                            </ul>
+                        </div>
+                    </div>
                     <a href="https://www.youtube.com/results?search_query=Crucifixo+inverso+maquina" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
@@ -284,6 +395,15 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
+                     <div class="tech-guide">
+                        <div class="guide-box success">
+                            <div class="guide-title">Execução</div>
+                            <ul class="guide-list">
+                                <li>Contraia o abdômen para tirar o quadril do chão.</li>
+                                <li>Desça as pernas devagar.</li>
+                            </ul>
+                        </div>
+                    </div>
                     <a href="https://www.youtube.com/results?search_query=Abdominal+infra+solo" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
@@ -302,8 +422,22 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <div class="tags"><span class="tag">Principal</span></div>
-                    <p class="notes">Livre ou Smith. Desça até 90 graus.</p>
+                    <div class="tech-guide">
+                        <div class="guide-box success">
+                            <div class="guide-title">Execução</div>
+                            <ul class="guide-list">
+                                <li>Joelhos para fora (acompanhando os pés).</li>
+                                <li>Peito aberto, olhar para frente.</li>
+                            </ul>
+                        </div>
+                        <div class="guide-box error">
+                            <div class="guide-title">Erros Comuns</div>
+                            <ul class="guide-list">
+                                <li>Deixar os joelhos entrarem (valgo).</li>
+                                <li>Tirar o calcanhar do chão.</li>
+                            </ul>
+                        </div>
+                    </div>
                     <a href="https://www.youtube.com/results?search_query=Agachamento+Smith+execucao" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
@@ -317,7 +451,22 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <p class="notes">Não travar joelhos na subida.</p>
+                    <div class="tech-guide">
+                        <div class="guide-box success">
+                            <div class="guide-title">Execução</div>
+                            <ul class="guide-list">
+                                <li>Lombar colada no banco o tempo todo.</li>
+                                <li>Pés na largura do quadril.</li>
+                            </ul>
+                        </div>
+                        <div class="guide-box error">
+                            <div class="guide-title">Erros Comuns</div>
+                            <ul class="guide-list">
+                                <li>Esticar totalmente o joelho (travar).</li>
+                                <li>Descolar o bumbum do banco.</li>
+                            </ul>
+                        </div>
+                    </div>
                     <a href="https://www.youtube.com/results?search_query=Leg+Press+45+execucao" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
@@ -331,7 +480,15 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <p class="notes">Última série drop-set até a falha.</p>
+                    <div class="tech-guide">
+                        <div class="guide-box success">
+                            <div class="guide-title">Execução</div>
+                            <ul class="guide-list">
+                                <li>Alinhe seu joelho com o eixo da máquina.</li>
+                                <li>Segure firme nos apoios laterais.</li>
+                            </ul>
+                        </div>
+                    </div>
                     <a href="https://www.youtube.com/results?search_query=Cadeira+Extensora+tecnica" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
@@ -345,7 +502,22 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <p class="notes">Foco no posterior. Coluna reta.</p>
+                    <div class="tech-guide">
+                        <div class="guide-box success">
+                            <div class="guide-title">Execução</div>
+                            <ul class="guide-list">
+                                <li>Empine o bumbum para trás.</li>
+                                <li>Barra descendo raspando na perna.</li>
+                            </ul>
+                        </div>
+                        <div class="guide-box error">
+                            <div class="guide-title">Erros Comuns</div>
+                            <ul class="guide-list">
+                                <li>Dobrar as costas (fazer um "C").</li>
+                                <li>Agachar em vez de apenas dobrar o quadril.</li>
+                            </ul>
+                        </div>
+                    </div>
                     <a href="https://www.youtube.com/results?search_query=Stiff+com+barra+execucao" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
@@ -359,7 +531,15 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <p class="notes">Movimento lento. Segure no topo.</p>
+                    <div class="tech-guide">
+                        <div class="guide-box success">
+                            <div class="guide-title">Execução</div>
+                            <ul class="guide-list">
+                                <li>Amplitude máxima (alongue bem).</li>
+                                <li>Pausa de 2 segundos lá em cima.</li>
+                            </ul>
+                        </div>
+                    </div>
                     <a href="https://www.youtube.com/results?search_query=Panturrilha+leg+press" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
@@ -378,7 +558,22 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <p class="notes">Banco 75º. Não bata os pesos.</p>
+                    <div class="tech-guide">
+                        <div class="guide-box success">
+                            <div class="guide-title">Execução</div>
+                            <ul class="guide-list">
+                                <li>Abdômen travado.</li>
+                                <li>Halteres descem até a altura da orelha.</li>
+                            </ul>
+                        </div>
+                        <div class="guide-box error">
+                            <div class="guide-title">Erros Comuns</div>
+                            <ul class="guide-list">
+                                <li>Arquear muito a lombar.</li>
+                                <li>Esticar o braço "trancando" o cotovelo.</li>
+                            </ul>
+                        </div>
+                    </div>
                     <a href="https://www.youtube.com/results?search_query=Desenvolvimento+halteres+sentado" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
@@ -392,7 +587,22 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <p class="notes">Levante os cotovelos, não as mãos.</p>
+                     <div class="tech-guide">
+                        <div class="guide-box success">
+                            <div class="guide-title">Execução</div>
+                            <ul class="guide-list">
+                                <li>Cotovelos levemente acima dos punhos.</li>
+                                <li>Movimento de "jogar para longe".</li>
+                            </ul>
+                        </div>
+                        <div class="guide-box error">
+                            <div class="guide-title">Erros Comuns</div>
+                            <ul class="guide-list">
+                                <li>Usar impulso do tronco.</li>
+                                <li>Subir as mãos acima dos ombros.</li>
+                            </ul>
+                        </div>
+                    </div>
                     <a href="https://www.youtube.com/results?search_query=Elevacao+lateral+halteres" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
@@ -408,7 +618,15 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <p class="notes">Tríceps Corda + Rosca Direta.</p>
+                    <div class="tech-guide">
+                        <div class="guide-box success">
+                            <div class="guide-title">Execução</div>
+                            <ul class="guide-list">
+                                <li>Tríceps: Cotovelo colado na costela. Abra a corda no final.</li>
+                                <li>Bíceps: Não balance o corpo.</li>
+                            </ul>
+                        </div>
+                    </div>
                     <a href="https://www.youtube.com/results?search_query=Triceps+corda+execucao" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
@@ -422,7 +640,21 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <p class="notes">Tríceps Testa + Rosca Alternada.</p>
+                    <div class="tech-guide">
+                        <div class="guide-box success">
+                            <div class="guide-title">Execução</div>
+                            <ul class="guide-list">
+                                <li>Testa: Barra desce em direção à testa/topo da cabeça.</li>
+                                <li>Alternada: Gire o punho na subida (supinação).</li>
+                            </ul>
+                        </div>
+                        <div class="guide-box error">
+                            <div class="guide-title">Erros Comuns</div>
+                            <ul class="guide-list">
+                                <li>Testa: Abrir os cotovelos para os lados.</li>
+                            </ul>
+                        </div>
+                    </div>
                     <a href="https://www.youtube.com/results?search_query=Triceps+testa+com+barra" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
@@ -436,7 +668,21 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <p class="notes">Trapézio com Halteres.</p>
+                    <div class="tech-guide">
+                        <div class="guide-box success">
+                            <div class="guide-title">Execução</div>
+                            <ul class="guide-list">
+                                <li>Suba os ombros em direção à orelha.</li>
+                                <li>Segure 2 segundos no topo.</li>
+                            </ul>
+                        </div>
+                        <div class="guide-box error">
+                            <div class="guide-title">Erros Comuns</div>
+                            <ul class="guide-list">
+                                <li>Girar os ombros (muito perigoso para o manguito). Faça movimento reto.</li>
+                            </ul>
+                        </div>
+                    </div>
                     <a href="https://www.youtube.com/results?search_query=Encolhimento+de+ombros+halteres" target="_blank" class="btn-video">▶ Ver Tutorial</a>
                 </div>
             </div>
@@ -461,7 +707,16 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <p class="notes">Relaxe a lombar e posteriores.</p>
+                    <div class="tech-guide">
+                        <div class="guide-box success">
+                            <div class="guide-title">Foco</div>
+                            <ul class="guide-list">
+                                <li>Posterior de coxa (alivia lombar).</li>
+                                <li>Peitoral (melhora postura).</li>
+                                <li>Mobilidade de quadril.</li>
+                            </ul>
+                        </div>
+                    </div>
                     <a href="https://www.youtube.com/results?search_query=alongamento+corpo+todo+diario" target="_blank" class="btn-video">▶ Ver Rotina</a>
                 </div>
             </div>
