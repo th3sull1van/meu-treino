@@ -29,6 +29,8 @@
             --success-color: #30d158;
             --error-color: #ff453a;
             --nav-blur: rgba(20, 20, 22, 0.85);
+            /* Nova variável para o cabeçalho */
+            --header-blur: rgba(5, 5, 5, 0.85); 
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -69,12 +71,25 @@
             100% { transform: translate(0, 0) scale(1); }
         }
 
-        /* --- UI Components --- */
-        header { padding: 20px 24px 10px; position: sticky; top: 0; z-index: 100; }
+        /* --- HEADER FIXED & BLURRED (Correção aqui) --- */
+        header { 
+            padding: 20px 24px 15px; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000;
+            /* Efeito de Vidro Fosco Escuro */
+            background: var(--header-blur);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            transition: all 0.3s ease;
+        }
+        
         h1 { 
             font-size: 2.2rem; font-weight: 800; letter-spacing: -0.02em;
             background: var(--accent-mesh); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            text-shadow: 0 10px 20px rgba(255, 55, 95, 0.25);
+            text-shadow: 0 10px 20px rgba(255, 55, 95, 0.15); /* Sombra reduzida para leitura */
         }
         .subtitle { font-size: 0.85rem; color: var(--text-secondary); font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.8; }
 
@@ -105,7 +120,6 @@
 
         .card-header { padding: 20px 22px; display: flex; justify-content: space-between; align-items: center; }
         
-        /* New Header Layout for English Names */
         .header-content { display: flex; flex-direction: column; }
         .ex-name { font-weight: 700; font-size: 1.1rem; margin-bottom: 2px; color: #fff; }
         .ex-eng { font-size: 0.8rem; color: var(--accent-text); font-style: italic; opacity: 0.9; margin-bottom: 4px; font-weight: 500; }
