@@ -29,8 +29,7 @@
             --success-color: #30d158;
             --error-color: #ff453a;
             --nav-blur: rgba(20, 20, 22, 0.85);
-            /* Nova variável para o cabeçalho */
-            --header-blur: rgba(5, 5, 5, 0.85); 
+            --header-blur: rgba(5, 5, 5, 0.85);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -71,25 +70,20 @@
             100% { transform: translate(0, 0) scale(1); }
         }
 
-        /* --- HEADER FIXED & BLURRED (Correção aqui) --- */
+        /* --- UI Components --- */
         header { 
             padding: 20px 24px 15px; 
-            position: sticky; 
-            top: 0; 
-            z-index: 1000;
-            /* Efeito de Vidro Fosco Escuro */
+            position: sticky; top: 0; z-index: 1000;
             background: var(--header-blur);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255,255,255,0.08);
             box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-            transition: all 0.3s ease;
         }
         
         h1 { 
             font-size: 2.2rem; font-weight: 800; letter-spacing: -0.02em;
             background: var(--accent-mesh); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            text-shadow: 0 10px 20px rgba(255, 55, 95, 0.15); /* Sombra reduzida para leitura */
+            text-shadow: 0 10px 20px rgba(255, 55, 95, 0.15);
         }
         .subtitle { font-size: 0.85rem; color: var(--text-secondary); font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.8; }
 
@@ -119,7 +113,6 @@
         .card:active { transform: scale(0.98); background: rgba(50, 50, 52, 0.6); }
 
         .card-header { padding: 20px 22px; display: flex; justify-content: space-between; align-items: center; }
-        
         .header-content { display: flex; flex-direction: column; }
         .ex-name { font-weight: 700; font-size: 1.1rem; margin-bottom: 2px; color: #fff; }
         .ex-eng { font-size: 0.8rem; color: var(--accent-text); font-style: italic; opacity: 0.9; margin-bottom: 4px; font-weight: 500; }
@@ -136,53 +129,44 @@
         .card-body { display: none; padding: 0 22px 24px; border-top: 1px solid rgba(255,255,255,0.05); }
         .card.open .card-body { display: block; }
 
-        /* --- Variations Section --- */
-        .var-box {
-            margin-top: 15px;
-            padding: 12px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 10px;
-            border: 1px dashed rgba(255, 255, 255, 0.15);
-        }
-        .var-title { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
-        .var-text { font-size: 0.9rem; color: #ddd; }
-
-        /* --- Tech Guide Styles --- */
+        /* --- Tech Guide --- */
         .tech-guide { display: grid; gap: 15px; margin: 20px 0; }
-        
         .guide-box {
-            position: relative;
-            padding: 15px 15px 15px 20px;
-            border-radius: 12px;
-            overflow: hidden;
+            position: relative; padding: 15px 15px 15px 20px; border-radius: 12px; overflow: hidden;
             background: linear-gradient(90deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%);
         }
-
         .guide-box.success { border-left: 3px solid var(--success-color); }
         .guide-box.success .guide-title { color: var(--success-color); }
-        
         .guide-box.error { border-left: 3px solid var(--error-color); }
         .guide-box.error .guide-title { color: var(--error-color); }
 
-        .guide-title {
-            font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
-            margin-bottom: 8px; display: flex; align-items: center; gap: 8px;
-        }
-
+        .guide-title { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
         .guide-list { list-style: none; margin: 0; padding: 0; }
-        .guide-list li {
-            position: relative; padding-left: 15px; margin-bottom: 6px;
-            font-size: 0.9rem; color: rgba(255, 255, 255, 0.85); line-height: 1.5;
-        }
+        .guide-list li { position: relative; padding-left: 15px; margin-bottom: 6px; font-size: 0.9rem; color: rgba(255, 255, 255, 0.85); line-height: 1.5; }
         .guide-box.success .guide-list li::before { content: "•"; color: var(--success-color); position: absolute; left: 0; top: 0; font-weight: bold; }
         .guide-box.error .guide-list li::before { content: "•"; color: var(--error-color); position: absolute; left: 0; top: 0; font-weight: bold; }
 
-        .btn-video {
-            display: block; width: 100%; padding: 16px; text-align: center;
+        /* --- VIDEO & VARIATIONS (NEW DESIGN) --- */
+        .video-section { margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 15px; }
+        .video-label { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; font-weight: 700; margin-bottom: 10px; display: block; }
+
+        .btn-main {
+            display: flex; align-items: center; justify-content: center; width: 100%; padding: 16px;
             background: var(--accent-mesh); border-radius: 16px;
             color: white; font-weight: 700; text-decoration: none; font-size: 1rem;
-            box-shadow: 0 4px 20px rgba(255, 55, 95, 0.4); margin-top: 15px;
+            box-shadow: 0 4px 20px rgba(255, 55, 95, 0.4); margin-bottom: 12px;
         }
+
+        .alt-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+        
+        .btn-alt {
+            font-size: 0.8rem; padding: 10px 14px; border-radius: 10px;
+            background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1);
+            color: #fff; text-decoration: none; display: flex; align-items: center; gap: 6px;
+            transition: 0.2s;
+        }
+        .btn-alt:active { background: rgba(255,255,255,0.2); transform: scale(0.95); }
+        .btn-alt svg { width: 14px; fill: #fff; opacity: 0.7; }
 
         /* Cardio Hero */
         .cardio-hero {
@@ -246,10 +230,6 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <div class="var-box">
-                        <div class="var-title">🔄 Opções / Máquinas</div>
-                        <div class="var-text">Smith Machine, Máquina Articulada (Plate Loaded) ou Barra Livre.</div>
-                    </div>
                     <div class="tech-guide">
                         <div class="guide-box success">
                             <div class="guide-title">Execução</div>
@@ -267,7 +247,16 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="https://www.youtube.com/results?search_query=Supino+Inclinado+com+Halteres+execucao" target="_blank" class="btn-video">▶ Ver Tutorial</a>
+                    
+                    <div class="video-section">
+                        <a href="https://www.youtube.com/results?search_query=Supino+Inclinado+com+Halteres+execucao" target="_blank" class="btn-main">▶ Tutorial: Halteres (Principal)</a>
+                        <div class="video-label">Ver Variações:</div>
+                        <div class="alt-grid">
+                            <a href="https://www.youtube.com/results?search_query=Supino+Inclinado+Smith+Machine" target="_blank" class="btn-alt">🎥 Smith Machine</a>
+                            <a href="https://www.youtube.com/results?search_query=Supino+Inclinado+Maquina+Articulada" target="_blank" class="btn-alt">🎥 Máquina Articulada</a>
+                            <a href="https://www.youtube.com/results?search_query=Supino+Inclinado+Barra" target="_blank" class="btn-alt">🎥 Barra Livre</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -281,10 +270,6 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <div class="var-box">
-                        <div class="var-title">🔄 Opções / Máquinas</div>
-                        <div class="var-text">Barra Fixa (Pull-up), Graviton ou Máquina Articulada (High Row).</div>
-                    </div>
                     <div class="tech-guide">
                         <div class="guide-box success">
                             <div class="guide-title">Execução</div>
@@ -301,7 +286,16 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="https://www.youtube.com/results?search_query=Puxada+Alta+Pulldown+execucao" target="_blank" class="btn-video">▶ Ver Tutorial</a>
+
+                    <div class="video-section">
+                        <a href="https://www.youtube.com/results?search_query=Puxada+Alta+Pulldown+execucao" target="_blank" class="btn-main">▶ Tutorial: Polia (Principal)</a>
+                        <div class="video-label">Ver Variações:</div>
+                        <div class="alt-grid">
+                            <a href="https://www.youtube.com/results?search_query=Barra+Fixa+com+Graviton" target="_blank" class="btn-alt">🎥 Graviton</a>
+                            <a href="https://www.youtube.com/results?search_query=Pull+Up+Barra+Fixa" target="_blank" class="btn-alt">🎥 Barra Fixa</a>
+                            <a href="https://www.youtube.com/results?search_query=High+Row+Machine+Costas" target="_blank" class="btn-alt">🎥 Máquina (High Row)</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -315,10 +309,6 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <div class="var-box">
-                        <div class="var-title">🔄 Opções / Máquinas</div>
-                        <div class="var-text">Supino com Halteres, Máquina Vertical (Chest Press) ou Smith.</div>
-                    </div>
                     <div class="tech-guide">
                         <div class="guide-box success">
                             <div class="guide-title">Execução</div>
@@ -328,7 +318,16 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="https://www.youtube.com/results?search_query=Supino+Reto+Barra+tecnica" target="_blank" class="btn-video">▶ Ver Tutorial</a>
+
+                    <div class="video-section">
+                        <a href="https://www.youtube.com/results?search_query=Supino+Reto+Barra+tecnica" target="_blank" class="btn-main">▶ Tutorial: Barra (Principal)</a>
+                        <div class="video-label">Ver Variações:</div>
+                        <div class="alt-grid">
+                            <a href="https://www.youtube.com/results?search_query=Supino+Reto+com+Halteres" target="_blank" class="btn-alt">🎥 Halteres</a>
+                            <a href="https://www.youtube.com/results?search_query=Chest+Press+Machine" target="_blank" class="btn-alt">🎥 Máquina Vertical</a>
+                            <a href="https://www.youtube.com/results?search_query=Supino+Reto+no+Smith" target="_blank" class="btn-alt">🎥 Smith</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -342,10 +341,6 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <div class="var-box">
-                        <div class="var-title">🔄 Opções / Máquinas</div>
-                        <div class="var-text">Remada Cavalinho (T-Bar), Serrote (Halter) ou Remada Baixa (Cabo).</div>
-                    </div>
                     <div class="tech-guide">
                         <div class="guide-box success">
                             <div class="guide-title">Execução</div>
@@ -355,7 +350,16 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="https://www.youtube.com/results?search_query=Remada+Curvada+barra+execucao" target="_blank" class="btn-video">▶ Ver Tutorial</a>
+
+                    <div class="video-section">
+                        <a href="https://www.youtube.com/results?search_query=Remada+Curvada+barra+execucao" target="_blank" class="btn-main">▶ Tutorial: Barra (Principal)</a>
+                        <div class="video-label">Ver Variações:</div>
+                        <div class="alt-grid">
+                            <a href="https://www.youtube.com/results?search_query=Remada+Cavalinho+Execucao" target="_blank" class="btn-alt">🎥 Cavalinho</a>
+                            <a href="https://www.youtube.com/results?search_query=Remada+Serrote+Halter" target="_blank" class="btn-alt">🎥 Serrote</a>
+                            <a href="https://www.youtube.com/results?search_query=Remada+Baixa+Triangulo" target="_blank" class="btn-alt">🎥 Cabo (Baixa)</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -371,10 +375,6 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <div class="var-box">
-                        <div class="var-title">🔄 Opções / Máquinas</div>
-                        <div class="var-text">Polia (Crossover) ou Halteres (Crucifixo Reto + Crucifixo Inverso).</div>
-                    </div>
                     <div class="tech-guide">
                         <div class="guide-box success">
                             <div class="guide-title">Execução</div>
@@ -384,7 +384,15 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="https://www.youtube.com/results?search_query=Crucifixo+inverso+maquina" target="_blank" class="btn-video">▶ Ver Tutorial</a>
+                    
+                    <div class="video-section">
+                        <a href="https://www.youtube.com/results?search_query=Crucifixo+inverso+maquina+peck+deck" target="_blank" class="btn-main">▶ Tutorial: Máquina (Ambos)</a>
+                        <div class="video-label">Ver Variações:</div>
+                        <div class="alt-grid">
+                            <a href="https://www.youtube.com/results?search_query=Crucifixo+na+Polia+Crossover" target="_blank" class="btn-alt">🎥 Polia (Crossover)</a>
+                            <a href="https://www.youtube.com/results?search_query=Crucifixo+Reto+Halteres" target="_blank" class="btn-alt">🎥 Halteres</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -398,7 +406,10 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <a href="https://www.youtube.com/results?search_query=Abdominal+infra+solo" target="_blank" class="btn-video">▶ Ver Tutorial</a>
+                    <div class="video-section">
+                        <a href="https://www.youtube.com/results?search_query=Abdominal+infra+solo" target="_blank" class="btn-main">▶ Tutorial: Infra</a>
+                        <a href="https://www.youtube.com/results?search_query=Prancha+isometrica+correta" target="_blank" class="btn-alt" style="width:100%; justify-content:center">🎥 Tutorial: Prancha</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -417,10 +428,6 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <div class="var-box">
-                        <div class="var-title">🔄 Opções / Máquinas</div>
-                        <div class="var-text">Hack Squat, Pendulum Squat ou Agachamento com Halteres (Goblet).</div>
-                    </div>
                     <div class="tech-guide">
                         <div class="guide-box success">
                             <div class="guide-title">Execução</div>
@@ -437,7 +444,16 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="https://www.youtube.com/results?search_query=Agachamento+Smith+execucao" target="_blank" class="btn-video">▶ Ver Tutorial</a>
+
+                    <div class="video-section">
+                        <a href="https://www.youtube.com/results?search_query=Agachamento+Smith+execucao" target="_blank" class="btn-main">▶ Tutorial: Smith (Principal)</a>
+                        <div class="video-label">Ver Variações:</div>
+                        <div class="alt-grid">
+                            <a href="https://www.youtube.com/results?search_query=Agachamento+Livre+Barra" target="_blank" class="btn-alt">🎥 Livre</a>
+                            <a href="https://www.youtube.com/results?search_query=Hack+Squat+Machine" target="_blank" class="btn-alt">🎥 Hack Machine</a>
+                            <a href="https://www.youtube.com/results?search_query=Agachamento+Goblet+Halter" target="_blank" class="btn-alt">🎥 Goblet (Halter)</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -451,10 +467,6 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <div class="var-box">
-                        <div class="var-title">🔄 Opções / Máquinas</div>
-                        <div class="var-text">Leg Press Horizontal ou Hack Machine.</div>
-                    </div>
                     <div class="tech-guide">
                         <div class="guide-box success">
                             <div class="guide-title">Execução</div>
@@ -470,7 +482,15 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="https://www.youtube.com/results?search_query=Leg+Press+45+execucao" target="_blank" class="btn-video">▶ Ver Tutorial</a>
+
+                    <div class="video-section">
+                        <a href="https://www.youtube.com/results?search_query=Leg+Press+45+execucao" target="_blank" class="btn-main">▶ Tutorial: 45 Graus</a>
+                        <div class="video-label">Ver Variações:</div>
+                        <div class="alt-grid">
+                            <a href="https://www.youtube.com/results?search_query=Leg+Press+Horizontal" target="_blank" class="btn-alt">🎥 Leg Horizontal</a>
+                            <a href="https://www.youtube.com/results?search_query=Hack+Squat+Machine" target="_blank" class="btn-alt">🎥 Hack Machine</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -493,7 +513,11 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="https://www.youtube.com/results?search_query=Cadeira+Extensora+tecnica" target="_blank" class="btn-video">▶ Ver Tutorial</a>
+                    
+                    <div class="video-section">
+                        <a href="https://www.youtube.com/results?search_query=Cadeira+Extensora+tecnica" target="_blank" class="btn-main">▶ Tutorial: Extensora</a>
+                        <a href="https://www.youtube.com/results?search_query=Extensora+Unilateral+execucao" target="_blank" class="btn-alt">🎥 Unilateral</a>
+                    </div>
                 </div>
             </div>
 
@@ -507,10 +531,6 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <div class="var-box">
-                        <div class="var-title">🔄 Opções / Máquinas</div>
-                        <div class="var-text">Stiff com Halteres ou Mesa Flexora (Leg Curl) se tiver dor lombar.</div>
-                    </div>
                     <div class="tech-guide">
                         <div class="guide-box success">
                             <div class="guide-title">Execução</div>
@@ -526,7 +546,15 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="https://www.youtube.com/results?search_query=Stiff+com+barra+execucao" target="_blank" class="btn-video">▶ Ver Tutorial</a>
+                    
+                    <div class="video-section">
+                        <a href="https://www.youtube.com/results?search_query=Stiff+com+barra+execucao" target="_blank" class="btn-main">▶ Tutorial: Barra</a>
+                        <div class="video-label">Ver Variações:</div>
+                        <div class="alt-grid">
+                            <a href="https://www.youtube.com/results?search_query=Stiff+com+Halteres" target="_blank" class="btn-alt">🎥 Halteres</a>
+                            <a href="https://www.youtube.com/results?search_query=Mesa+Flexora+Posterior" target="_blank" class="btn-alt">🎥 Mesa Flexora (Substituto)</a>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -540,10 +568,6 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <div class="var-box">
-                        <div class="var-title">🔄 Opções / Máquinas</div>
-                        <div class="var-text">Panturrilha Sentado (Seated Calf) ou Em Pé na Máquina (Standing Calf).</div>
-                    </div>
                     <div class="tech-guide">
                         <div class="guide-box success">
                             <div class="guide-title">Execução</div>
@@ -553,7 +577,15 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="https://www.youtube.com/results?search_query=Panturrilha+leg+press" target="_blank" class="btn-video">▶ Ver Tutorial</a>
+                    
+                    <div class="video-section">
+                        <a href="https://www.youtube.com/results?search_query=Panturrilha+leg+press" target="_blank" class="btn-main">▶ Tutorial: Leg Press</a>
+                        <div class="video-label">Ver Variações:</div>
+                        <div class="alt-grid">
+                            <a href="https://www.youtube.com/results?search_query=Panturrilha+Sentado+Maquina" target="_blank" class="btn-alt">🎥 Sentado (Burrinho)</a>
+                            <a href="https://www.youtube.com/results?search_query=Panturrilha+em+Pe+Maquina" target="_blank" class="btn-alt">🎥 Em Pé Máquina</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -572,10 +604,6 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <div class="var-box">
-                        <div class="var-title">🔄 Opções / Máquinas</div>
-                        <div class="var-text">Desenvolvimento Máquina, Barra (Military Press) ou Smith.</div>
-                    </div>
                     <div class="tech-guide">
                         <div class="guide-box success">
                             <div class="guide-title">Execução</div>
@@ -592,7 +620,16 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="https://www.youtube.com/results?search_query=Desenvolvimento+halteres+sentado" target="_blank" class="btn-video">▶ Ver Tutorial</a>
+
+                    <div class="video-section">
+                        <a href="https://www.youtube.com/results?search_query=Desenvolvimento+halteres+sentado" target="_blank" class="btn-main">▶ Tutorial: Halteres (Principal)</a>
+                        <div class="video-label">Ver Variações:</div>
+                        <div class="alt-grid">
+                            <a href="https://www.youtube.com/results?search_query=Desenvolvimento+Maquina+Articulada" target="_blank" class="btn-alt">🎥 Máquina</a>
+                            <a href="https://www.youtube.com/results?search_query=Desenvolvimento+Smith+Machine" target="_blank" class="btn-alt">🎥 Smith</a>
+                            <a href="https://www.youtube.com/results?search_query=Desenvolvimento+Barra+Militar" target="_blank" class="btn-alt">🎥 Barra (Militar)</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -606,10 +643,6 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <div class="var-box">
-                        <div class="var-title">🔄 Opções / Máquinas</div>
-                        <div class="var-text">Polia (Cable Lateral Raise) ou Máquina de Elevação Lateral.</div>
-                    </div>
                     <div class="tech-guide">
                         <div class="guide-box success">
                             <div class="guide-title">Execução</div>
@@ -626,7 +659,15 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="https://www.youtube.com/results?search_query=Elevacao+lateral+halteres" target="_blank" class="btn-video">▶ Ver Tutorial</a>
+
+                    <div class="video-section">
+                        <a href="https://www.youtube.com/results?search_query=Elevacao+lateral+halteres" target="_blank" class="btn-main">▶ Tutorial: Halteres</a>
+                        <div class="video-label">Ver Variações:</div>
+                        <div class="alt-grid">
+                            <a href="https://www.youtube.com/results?search_query=Elevacao+lateral+polia" target="_blank" class="btn-alt">🎥 Polia (Cabo)</a>
+                            <a href="https://www.youtube.com/results?search_query=Elevacao+lateral+maquina" target="_blank" class="btn-alt">🎥 Máquina</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -642,10 +683,6 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <div class="var-box">
-                        <div class="var-title">🔄 Opções / Máquinas</div>
-                        <div class="var-text">Tríceps Barra Reta + Rosca com Halteres.</div>
-                    </div>
                     <div class="tech-guide">
                         <div class="guide-box success">
                             <div class="guide-title">Execução</div>
@@ -655,7 +692,18 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="https://www.youtube.com/results?search_query=Triceps+corda+execucao" target="_blank" class="btn-video">▶ Ver Tutorial</a>
+                    
+                    <div class="video-section">
+                        <a href="https://www.youtube.com/results?search_query=Triceps+corda+execucao" target="_blank" class="btn-main">▶ Tutorial: Tríceps Corda</a>
+                        <div class="alt-grid">
+                             <a href="https://www.youtube.com/results?search_query=Rosca+Direta+Barra" target="_blank" class="btn-main" style="margin-top:0">▶ Tutorial: Rosca Direta</a>
+                        </div>
+                        <div class="video-label" style="margin-top:10px">Ver Variações:</div>
+                        <div class="alt-grid">
+                            <a href="https://www.youtube.com/results?search_query=Triceps+Barra+Reta+Polia" target="_blank" class="btn-alt">🎥 Tríceps Barra</a>
+                            <a href="https://www.youtube.com/results?search_query=Rosca+Direta+Halteres" target="_blank" class="btn-alt">🎥 Rosca Halteres</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -669,10 +717,6 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <div class="var-box">
-                        <div class="var-title">🔄 Opções / Máquinas</div>
-                        <div class="var-text">Tríceps Francês + Rosca Martelo.</div>
-                    </div>
                     <div class="tech-guide">
                         <div class="guide-box success">
                             <div class="guide-title">Execução</div>
@@ -682,7 +726,16 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="https://www.youtube.com/results?search_query=Triceps+testa+com+barra" target="_blank" class="btn-video">▶ Ver Tutorial</a>
+                    
+                    <div class="video-section">
+                        <a href="https://www.youtube.com/results?search_query=Triceps+testa+com+barra" target="_blank" class="btn-main">▶ Tutorial: Tríceps Testa</a>
+                        <a href="https://www.youtube.com/results?search_query=Rosca+Alternada+Halteres" target="_blank" class="btn-main" style="margin-top:0">▶ Tutorial: Alternada</a>
+                        <div class="video-label" style="margin-top:10px">Ver Variações:</div>
+                        <div class="alt-grid">
+                            <a href="https://www.youtube.com/results?search_query=Triceps+Frances+Halter" target="_blank" class="btn-alt">🎥 Tríceps Francês</a>
+                            <a href="https://www.youtube.com/results?search_query=Rosca+Martelo+Halter" target="_blank" class="btn-alt">🎥 Rosca Martelo</a>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -696,10 +749,6 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <div class="var-box">
-                        <div class="var-title">🔄 Opções / Máquinas</div>
-                        <div class="var-text">Encolhimento no Smith ou Barra Livre.</div>
-                    </div>
                     <div class="tech-guide">
                         <div class="guide-box success">
                             <div class="guide-title">Execução</div>
@@ -715,7 +764,15 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="https://www.youtube.com/results?search_query=Encolhimento+de+ombros+halteres" target="_blank" class="btn-video">▶ Ver Tutorial</a>
+                    
+                    <div class="video-section">
+                        <a href="https://www.youtube.com/results?search_query=Encolhimento+de+ombros+halteres" target="_blank" class="btn-main">▶ Tutorial: Halteres</a>
+                        <div class="video-label">Ver Variações:</div>
+                        <div class="alt-grid">
+                            <a href="https://www.youtube.com/results?search_query=Encolhimento+no+Smith" target="_blank" class="btn-alt">🎥 Smith Machine</a>
+                            <a href="https://www.youtube.com/results?search_query=Encolhimento+Barra" target="_blank" class="btn-alt">🎥 Barra Livre</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -751,7 +808,9 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="https://www.youtube.com/results?search_query=alongamento+corpo+todo+diario" target="_blank" class="btn-video">▶ Ver Rotina</a>
+                    <div class="video-section">
+                        <a href="https://www.youtube.com/results?search_query=alongamento+corpo+todo+diario" target="_blank" class="btn-main">▶ Ver Rotina Completa</a>
+                    </div>
                 </div>
             </div>
 
@@ -765,7 +824,9 @@
                     <div class="toggle-btn">▼</div>
                 </div>
                 <div class="card-body">
-                    <a href="https://www.youtube.com/results?search_query=abdominal+remador" target="_blank" class="btn-video">▶ Ver Tutorial</a>
+                    <div class="video-section">
+                         <a href="https://www.youtube.com/results?search_query=abdominal+remador" target="_blank" class="btn-main">▶ Tutorial: Remador</a>
+                    </div>
                 </div>
             </div>
         </div>
